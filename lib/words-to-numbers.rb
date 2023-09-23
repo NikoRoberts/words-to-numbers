@@ -16,13 +16,12 @@ module WordsToNumbers
   BLACKLIST_SINGULAR_WORDS = ['a']
 
   def self.translate_words_to_numbers(text)
-    pattern = /(?:\d+|\b(?:#{ALL_WORDS.keys.join('|')})\b|\p{Nd}+)/i
+    pattern = /(?:\d+|\b(?:#{ALL_WORDS.keys.join('|')})\b|\p{N})/i
     numbers = []
 
-    text.downcase.scan(pattern) do |match|
+    text.scan(pattern) do |match|
       match = match.to_s.downcase
       if ALL_WORDS.keys.include?(match.to_s)
-
         number = ALL_WORDS[match]
         numbers << number if number && !BLACKLIST_SINGULAR_WORDS.include?(match)
       else

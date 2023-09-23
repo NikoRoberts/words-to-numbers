@@ -8,7 +8,7 @@ RSpec.describe WordsToNumbers do
   describe "with unicode characters" do
     let(:input_text) { "Do me a favour and call me bro. O .four. 7️⃣ .𝟜. THREE boys FIVE men SIX dudes 745 needed" }
 
-    it "expects to extract words and unicode characters" do
+    it "expects to extract numbers" do
       expect(WordsToNumbers.translate_words_to_numbers(input_text).join("")).to eq "0474356745"
     end
   end
@@ -24,8 +24,16 @@ RSpec.describe WordsToNumbers do
   describe "with mainly numbers broken up by other chars" do
     let(:input_text) { "0445 and then 2.3.4 and then 4-3-2" }
 
-    it "expects to extract words and unicode characters" do
+    it "expects to extract numbers" do
       expect(WordsToNumbers.translate_words_to_numbers(input_text).join("")).to eq "0445234432"
+    end
+  end
+
+  describe "with more obscure unicode characters" do
+    let(:input_text) { "0❹①²３𝟑" }
+
+    it "expects to translate to number" do
+      expect(WordsToNumbers.translate_words_to_numbers(input_text).join("")).to eq "041233"
     end
   end
 end
