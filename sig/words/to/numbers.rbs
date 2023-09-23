@@ -1,0 +1,8 @@
+module Words
+  module To
+    module Numbers
+      VERSION: String
+      # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+    end
+  end
+end
